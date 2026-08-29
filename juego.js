@@ -26,3 +26,58 @@ const estadoInicial = {
     ],
     casas:[]
 };
+
+function crearGenerador(semilla) {
+    let estado = semilla;
+
+    return function() {
+        estado = (estado * 7 + 3) % 1000;
+        return estado;
+    } 
+}
+
+function numeroAPosicion(numero) {
+    numero = numero % 100;
+
+    return {
+        fila: Math.floor(numero/10),
+        columna: numero % 10
+    };
+}
+
+function posicionOcupada(posicion, casas) {
+    for (const casa of casas) {
+        if(
+            casa.fila === posicion.fila &&
+            casa.columna === posicion.columna
+        ) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function generarCasas(semilla) {
+    const generador = crearGenerador(semilla);
+    const casas = [];
+
+    while (casas.length < cantCasas) {
+        const numero = generador();
+        const posicion = numeroAPosicion(numero);
+
+        if(
+            !posicionOcupada(posicion, casas) &&
+            !(posicion.fila === 0 && posicion.columna === 0) &&
+            !(posicion.fila === 9 && posicion.columna === 9)
+        ) {
+            casas.push(posicion);
+        }
+    }
+
+    return casas;
+}
+
+const casas = generarCasas(123);
+
+console.log("Casas generadas: ");
+console.log(casas);
