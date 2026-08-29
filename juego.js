@@ -16,3 +16,13 @@ const jugador2 = {
         {fila: 9, columna: 9}
     ]
 };
+
+const estadoInicial = {
+    filas: filas,
+    columnas: columnas,
+    jugadores: [
+        jugador1,
+        jugador2
+    ],
+    casas:[]
+};
