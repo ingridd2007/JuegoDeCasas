@@ -41,8 +41,6 @@ function crearGenerador(semilla) {
 }
 
 function numeroAPosicion(numero) {
-    numero = numero % 100;
-
     return {
         fila: Math.floor(numero/10),
         columna: numero % 10
@@ -66,7 +64,8 @@ function generarCasas(semilla) {
     const casas = [];
 
     while (casas.length < cantCasas) {
-        const numero = generador();
+        const numeroAleatorio = generador();
+        const numero = Math.floor(numeroAleatorio * 100);
         const posicion = numeroAPosicion(numero);
 
         if(
@@ -81,13 +80,7 @@ function generarCasas(semilla) {
     return casas;
 }
 
-const generador = crearGenerador(456);
+const casas = generarCasas(789);
 
-console.log(generador());
-console.log(generador());
-console.log(generador());
-
-//const casas = generarCasas(123);
-
-//console.log("Casas generadas: ");
-//console.log(casas);
+console.log("Casas generadas:");
+console.log(casas);
