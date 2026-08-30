@@ -80,7 +80,43 @@ function generarCasas(semilla) {
     return casas;
 }
 
+function calcularMovimiento(ficha, direccion, cantidad) {
+    let nuevaFila = ficha.fila;
+    let nuevaColumna = ficha.columna;
+
+    if(direccion === "arriba") {
+        nuevaFila = nuevaFila - cantidad;
+    }
+
+    if(direccion === "abajo") {
+        nuevaFila = nuevaFila + cantidad;
+    }
+
+    if(direccion === "izquierda") {
+        nuevaColumna = nuevaColumna - cantidad;
+    }
+
+    if(direccion === "derecha") {
+        nuevaColumna = nuevaColumna + cantidad;
+    }
+
+    return {
+        fila: nuevaFila,
+        columna: nuevaColumna
+    };
+}
+
 const casas = generarCasas(789);
 
 console.log("Casas generadas:");
 console.log(casas);
+
+const ficha = {
+    fila: 4,
+    columna: 5
+};
+
+console.log("Movimiento arriba: ", calcularMovimiento(ficha, "arriba", 2));
+console.log("Movimiento abajo: ", calcularMovimiento(ficha, "abajo", 2));
+console.log("Movimiento izquierda: ", calcularMovimiento(ficha, "izquierda", 2));
+console.log("Movimiento derecha: ", calcularMovimiento(ficha, "derecha", 2));
