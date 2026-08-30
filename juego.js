@@ -31,9 +31,13 @@ function crearGenerador(semilla) {
     let estado = semilla;
 
     return function() {
-        estado = (estado * 7 + 3) % 1000;
-        return estado;
-    } 
+        let numero = estado += 0xD2B79F5;
+
+        numero = Math.imul(numero ^ numero >>> 15, numero | 1);
+        numero ^= numero + Math.imul(numero ^ numero >>> 7, numero | 61);
+
+        return((numero ^ numero >>> 14) >>> 0) / 4294967296;
+    }; 
 }
 
 function numeroAPosicion(numero) {
@@ -77,7 +81,13 @@ function generarCasas(semilla) {
     return casas;
 }
 
-const casas = generarCasas(123);
+const generador = crearGenerador(456);
 
-console.log("Casas generadas: ");
-console.log(casas);
+console.log(generador());
+console.log(generador());
+console.log(generador());
+
+//const casas = generarCasas(123);
+
+//console.log("Casas generadas: ");
+//console.log(casas);
